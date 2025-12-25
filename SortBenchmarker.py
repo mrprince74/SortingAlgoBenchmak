@@ -23,8 +23,8 @@ class SortBenchmarker:
         total_memory = 0
         all_results = [self._run_benchmark(sorting_algorithm, data) for data in self._all_data]
         return {
-            "time_in_ms" : sum([result["time_in_ms"] for result in all_results]) / len(self._all_data),
-            "memory_in_bytes" : sum([result["memory_in_bytes"] for result in all_results]) / len(self._all_data),
+            "time_in_ms" :  0 if len(self._all_data) == 0 else sum([result["time_in_ms"] for result in all_results]) / len(self._all_data),
+            "memory_in_bytes" : 0 if len(self._all_data) == 0 else sum([result["memory_in_bytes"] for result in all_results]) / len(self._all_data),
         }
         
         
