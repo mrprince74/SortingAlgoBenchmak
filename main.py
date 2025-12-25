@@ -1,7 +1,9 @@
 import random
+from BucketSort import BucketSort
 from CountSort import CountSort
 from HeapSort import HeapSort
 from QuickSort import QuickSort
+from RadixSort import RadixSort
 from SortBenchmarker import SortBenchmarker
 from TestCaseGenerator import TestCaseGenerator
 from Visualizer import Visualizer
@@ -12,6 +14,8 @@ def main():
         HeapSort(),
         QuickSort(),
         CountSort(),
+        BucketSort(),
+        RadixSort(),
     ]
     test_sets = {
         "Small Set" : [TestCaseGenerator.generate_small() for _ in range(SET_SIZE)],
