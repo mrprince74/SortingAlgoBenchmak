@@ -1,6 +1,7 @@
 import random
 from BucketSort import BucketSort
 from CountSort import CountSort
+from Exporter import Exporter
 from HeapSort import HeapSort
 from QuickSort import QuickSort
 from RadixSort import RadixSort
@@ -35,6 +36,7 @@ def main():
             benchmarker_data[set_name][algo.name] = data
         
     pprint(benchmarker_data)
+    Exporter.export_to_excel(benchmarker_data)
     Visualizer.draw_benchmarks(benchmarker_data)
 
 
