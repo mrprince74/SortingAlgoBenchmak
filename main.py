@@ -1,31 +1,35 @@
 import random
 from CountSort import CountSort
 from HeapSort import HeapSort
-from MergeSort import MergeSort
 from QuickSort import QuickSort
 from SortBenchmarker import SortBenchmarker
+from TestCaseGenerator import TestCaseGenerator
 from Visualizer import Visualizer
 from pprint import pprint
-
+SET_SIZE = 10
 def main():
     algorithms = [
         HeapSort(),
         QuickSort(),
         CountSort(),
     ]
-
-
+    test_sets = {
+        "Small Set" : [TestCaseGenerator.generate_small() for _ in range(SET_SIZE)],
+        "Medium Set" : [TestCaseGenerator.generate_medium() for _ in range(SET_SIZE)],
+        "Large Set" : [TestCaseGenerator.generate_large() for _ in range(SET_SIZE)],
+        "Already Sorted Set" : [TestCaseGenerator.generate_already_sorted() for _ in range(SET_SIZE)],
+        "Reverse Sorted Set" : [TestCaseGenerator.generate_reverse_sorted() for _ in range(SET_SIZE)],
+        "Identical Set" : [TestCaseGenerator.generate_identical() for _ in range(SET_SIZE)],
+    }
 
     benchmarker_data = {}
-    for size in [100, 500, 1000]:
-        data = [random.randint(0, 1000) for _ in range(size)]
+    for set_name, data  in test_sets.items():
         benchmarker = SortBenchmarker(data)
-        benchmarker_data[size] = {}
+        benchmarker_data[set_name] = {}
         for algo in algorithms:
-            data = benchmarker.run_benchmark(algo)
-            benchmarker_data[size][algo.name] = data
-            metrics = list(data.keys())
-
+            data = benchmarker.run_benchmarks(algo)
+            benchmarker_data[set_name][algo.name] = data
+        
     pprint(benchmarker_data)
     Visualizer.draw_benchmarks(benchmarker_data)
 
